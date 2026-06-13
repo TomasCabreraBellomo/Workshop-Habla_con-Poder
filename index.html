@@ -222,38 +222,23 @@ nav {
 
 /* FORMULARIO */
 .form-section { background: #fff; border-bottom: 1px solid var(--border); padding: 56px 40px; }
-.form-intro { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; line-height: 1.6; }
-.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; margin-bottom: 16px; }
-.form-group { display: flex; flex-direction: column; gap: 6px; }
-.form-group label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
-.form-group input, .form-group select {
+.form-intro { font-size: 14px; color: var(--text-muted); margin-bottom: 22px; line-height: 1.6; max-width: 560px; }
+.form-link-card {
   background: var(--bg-soft);
   border: 1px solid var(--border);
-  border-radius: 8px; padding: 11px 14px;
-  color: var(--text); font-size: 14px;
-  font-family: 'Inter', sans-serif; outline: none;
-  transition: border 0.15s;
+  border-left: 3px solid var(--bordo);
+  border-radius: 10px;
+  padding: 24px 28px;
 }
-.form-group input:focus, .form-group select:focus { border-color: var(--bordo); box-shadow: 0 0 0 3px rgba(157,29,60,0.08); }
-.form-check { display: flex; align-items: flex-start; gap: 10px; margin: 16px 0 24px; }
-.form-check input[type=checkbox] { width: 16px; height: 16px; margin-top: 2px; accent-color: var(--bordo); flex-shrink: 0; }
-.form-check label { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+.form-link-note { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px; }
 .btn-form {
+  display: inline-block;
   background: var(--bordo); color: #fff; font-weight: 700;
   font-size: 15px; padding: 14px 36px; border-radius: 8px;
-  border: none; cursor: pointer; width: 100%;
+  border: none; cursor: pointer; text-align: center;
   transition: background 0.15s, transform 0.1s;
 }
 .btn-form:hover { background: var(--bordo-light); transform: translateY(-1px); }
-.form-success {
-  display: none;
-  background: var(--bordo-pale);
-  border: 1px solid rgba(157,29,60,0.2);
-  border-radius: 12px; padding: 36px; text-align: center;
-}
-.form-success .check { font-size: 40px; margin-bottom: 12px; }
-.form-success h3 { color: var(--bordo); font-size: 20px; margin-bottom: 8px; }
-.form-success p { color: var(--text-muted); font-size: 14px; line-height: 1.7; }
 
 /* ORGANIZA */
 .org-section { background: var(--bg-soft); border-bottom: 1px solid var(--border); padding: 56px 40px; }
@@ -306,6 +291,8 @@ nav {
   .precio-section, .form-section, .org-section, .contact-section
   { padding-left: 20px; padding-right: 20px; }
   .hero { padding-top: 48px; padding-bottom: 48px; }
+  .form-link-card { padding: 20px; }
+  .btn-form { display: block; width: 100%; }
 }
 </style>
 </head>
@@ -448,52 +435,10 @@ nav {
   <div class="section-wrap">
     <div class="sec-eyebrow">Inscripción</div>
     <div class="sec-title">Reservá tu lugar</div>
-    <p class="form-intro">Completá el formulario para asegurar tu participación. Los cupos son limitados.</p>
-    <div id="form-area">
-    <form id="inscripcion-form" action="https://formspree.io/f/acneventosyrrpp@gmail.com" method="POST" onsubmit="return enviarFormulario(event)">
-    <!-- Hidden fields for Formspree -->
-    <input type="hidden" name="_subject" value="Nueva inscripción – Workshop Hablá con Poder">
-    <input type="hidden" name="_replyto" id="reply-email">
-      <div class="form-grid">
-        <div class="form-group"><label>Nombre *</label><input type="text" id="f-nombre" name="nombre" placeholder="Tu nombre"></div>
-        <div class="form-group"><label>Apellido *</label><input type="text" id="f-apellido" name="apellido" placeholder="Tu apellido"></div>
-        <div class="form-group"><label>E-mail *</label><input type="email" id="f-email" name="email" placeholder="tu@email.com" oninput="document.getElementById('reply-email').value=this.value"></div>
-        <div class="form-group"><label>Teléfono / WhatsApp</label><input type="tel" id="f-tel" name="telefono" placeholder="+54 381 ..."></div>
-        <div class="form-group"><label>Empresa / Organización</label><input type="text" id="f-empresa" name="empresa" placeholder="Nombre de tu empresa"></div>
-        <div class="form-group"><label>Cargo / Rol</label><input type="text" id="f-cargo" name="cargo" placeholder="Tu cargo actual"></div>
-        <div class="form-group">
-          <label>Sector</label>
-          <select id="f-rubro" name="sector">
-            <option value="">Seleccioná tu sector</option>
-            <option>Empresa privada</option>
-            <option>Organismo público</option>
-            <option>Emprendedor / Freelance</option>
-            <option>Estudiante universitario</option>
-            <option>Profesional independiente</option>
-            <option>Otro</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Forma de pago</label>
-          <select id="f-pago" name="forma_de_pago">
-            <option value="">Seleccioná cómo vas a pagar</option>
-            <option>Transferencia bancaria (alias: acneventos)</option>
-            <option>Mercado Pago</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-check">
-        <input type="checkbox" id="f-terminos">
-        <label for="f-terminos">Acepto que mis datos sean utilizados para la gestión de esta inscripción y comunicaciones relacionadas con el evento.</label>
-      </div>
-      <button class="btn-form" type="submit">Completar inscripción →</button>
-    </form>
-    </div>
-    <div class="form-success" id="form-success">
-      <div class="check">✅</div>
-      <h3>¡Inscripción recibida!</h3>
-      <p>Gracias por sumarte. Nos pondremos en contacto a la brevedad para confirmar tu lugar y coordinar el pago.<br><br>
-      Ante consultas escribinos a <strong>acneventosyrrpp@gmail.com</strong></p>
+    <p class="form-intro">Completá la inscripción en Google Forms para asegurar tu participación. Los cupos son limitados.</p>
+    <div class="form-link-card">
+      <p class="form-link-note">El formulario se abre en una nueva pestaña para que puedas cargar tus datos y confirmar tu lugar.</p>
+      <a class="btn-form" href="https://docs.google.com/forms/d/e/1FAIpQLSd3p1wcmqPAmr9Jxd6nbEdkQ3T05wAVRD18WmqvMyfRaolDmQ/viewform" target="_blank" rel="noopener">Completar inscripción →</a>
     </div>
   </div>
 </div>
@@ -560,40 +505,5 @@ nav {
   </div>
 </div>
 
-<script>
-function enviarFormulario(e) {
-  e.preventDefault();
-  const nombre = document.getElementById('f-nombre').value.trim();
-  const apellido = document.getElementById('f-apellido').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  const terminos = document.getElementById('f-terminos').checked;
-  if (!nombre || !apellido || !email) {
-    alert('Por favor completá al menos nombre, apellido y e-mail.');
-    return false;
-  }
-  if (!terminos) {
-    alert('Por favor aceptá los términos para continuar.');
-    return false;
-  }
-  const form = document.getElementById('inscripcion-form');
-  const data = new FormData(form);
-  fetch('https://formspree.io/f/acneventosyrrpp@gmail.com', {
-    method: 'POST',
-    body: data,
-    headers: { 'Accept': 'application/json' }
-  }).then(response => {
-    if (response.ok) {
-      document.getElementById('form-area').style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
-      document.getElementById('form-success').scrollIntoView({behavior:'smooth'});
-    } else {
-      alert('Hubo un problema al enviar. Por favor escribinos a acneventosyrrpp@gmail.com');
-    }
-  }).catch(() => {
-    alert('Error de conexión. Por favor escribinos a acneventosyrrpp@gmail.com');
-  });
-  return false;
-}
-</script>
 </body>
 </html>
